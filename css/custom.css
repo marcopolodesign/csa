@@ -1,0 +1,146 @@
+:root {
+    --mainColor : #B6FD87;
+    --mainDarkColor: #2E6B5C;
+    --secondaryDarkColor: #448263;
+
+    --mainGradient: linear-gradient(149.47deg, #B6FD87 1.67%, #EEFFE2 102.17%);
+    --secondaryGradient: linear-gradient(180deg, #B6FD87 0%, #FDF887 100%);
+
+    --smooth: all 0.45s cubic-bezier(0.4, 0, 0, 1);
+    --border-radius: 8px;
+    --smoothT: cubic-bezier(0.4, 0, 0, 1);
+}
+
+
+@font-face {
+    font-family: 'TWK Everett';
+    src: url('fonts/TWKEverett-Regular.woff2') format('woff2'),
+        url('fonts/TWKEverett-Regular.woff') format('woff'),
+        url('fonts/TWKEverett-Regular.ttf') format('truetype'),
+        url('fonts/TWKEverett-Regular.svg#TWKEverett-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TWK Everett';
+    src: url('fonts/TWKEverett-Light.woff2') format('woff2'),
+        url('fonts/TWKEverett-Light.woff') format('woff'),
+        url('fonts/TWKEverett-Light.ttf') format('truetype'),
+        url('fonts/TWKEverett-Light.svg#TWKEverett-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TWK Everett';
+    src: url('fonts/TWKEverett-Bold.woff2') format('woff2'),
+        url('fonts/TWKEverett-Bold.woff') format('woff'),
+        url('fonts/TWKEverett-Bold.ttf') format('truetype'),
+        url('fonts/TWKEverett-Bold.svg#TWKEverett-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+body {
+    font-family: 'TWK Everett', Helvetica, sans-serif;
+    background-color: #000;
+    color: #fff;
+    font-weight: 300;
+}
+
+
+/* Fonts */
+
+.f0, h1.f0, h2.f0, h3.f0, h4.f0, h5.f0, h6.f0 {
+    font-size: 5.8rem;
+    line-height: 1;
+}
+
+.page-starter h1.f0 {
+    font-size: 5.8vw;
+}
+
+/* Colors */
+
+.main-color-bg {
+    background: var(--mainColor);
+}
+
+.main-gradient-bg {
+    background: var(--mainGradient);
+}
+
+.secondary-gradient-bg {
+    background: var(--secondaryGradient);
+}
+
+
+/* Nav */
+
+header.container-xs {
+    padding: 50px 120px;
+    transition: var(--smooth);
+}
+
+header.scrolled {
+    background-color: #ffffff11;
+    backdrop-filter: blur(100px)
+}
+
+header.container-xs.scrolled {
+    padding: 1rem 60px;
+}
+
+header.scrolled #wording {
+    opacity: 0;
+    height: 0px
+}
+
+header.scrolled .logo {
+    height: 32px;
+}
+
+.header-nav a {
+    color: #000 !important;
+}
+
+header.scrolled .header-nav a {
+    color: #fff !important;
+}
+
+header.scrolled .header-nav li:last-child a {
+    border-color: #fff;
+}
+
+.header-nav li:last-child a {
+    border: 1px solid #000;
+    text-decoration: none;
+    padding: 8.5px 25px;
+}
+
+/* Footer Desktop */
+
+.footer-col > * {
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+
+.main-cta {
+    padding: 12.5px 40px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-flex;
+}
+
+.main-cta.main-color-bg {
+    color: var(--secondaryDarkColor)
+}
+
+
