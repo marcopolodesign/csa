@@ -29,7 +29,7 @@
         url('fonts/TWKEverett-Light.woff') format('woff'),
         url('fonts/TWKEverett-Light.ttf') format('truetype'),
         url('fonts/TWKEverett-Light.svg#TWKEverett-Light') format('svg');
-    font-weight: 300;
+    font-weight: 100;
     font-style: normal;
     font-display: swap;
 }
@@ -50,7 +50,7 @@ body {
     font-family: 'TWK Everett', Helvetica, sans-serif;
     background-color: #000;
     color: #fff;
-    font-weight: 300;
+    font-weight: 100;
 }
 
 
@@ -143,4 +143,35 @@ header.scrolled .header-nav li:last-child a {
     color: var(--secondaryDarkColor)
 }
 
+/* Home */
 
+
+.starter-arrow {
+    position: absolute;
+    transform: translate(-50%, 50%);
+    transition: var(--smooth);
+}
+
+/* FAQ custom arrow */
+
+.faq-arrow {
+    transition: var(--smooth);
+}
+
+.category-info:hover .faq-arrow {
+    background-color: var(--mainColor);
+}
+
+.faq-arrow svg {
+    transform: rotate(-90deg);
+}
+
+.category-info:hover .faq-arrow svg, .faq-item[area-expanded="true"]  .faq-arrow svg {
+    color: var(--mainDarkColor);
+    transform: rotate(0deg);
+}
+
+
+.category-info:hover .faq-arrow svg path {
+    stroke: var(--mainDarkColor);
+}

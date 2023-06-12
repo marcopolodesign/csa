@@ -224,7 +224,7 @@
   }
   
   body {
-    cursor: none;
+    /* cursor: none; */
   }
   
   /* Cursor styles */
@@ -630,7 +630,7 @@
     width: min-content;
   }
   
-  .w-max {
+  .w-max, .width-m {
     width: max-content;
   }
   
@@ -902,116 +902,110 @@
     transform: scaleX(1) !important;
   }
   
-  /* FAQ */
-  .faq-image {
-    width: 25%;
-    height: 80%;
-    bottom: -10%;
-  }
-  
-  .faq-span-title,
-  .mb-span {
-    border: 1px solid black;
-    height: 1px;
-    align-self: center;
-    flex-grow: 1;
-    margin: 0 20px;
-  }
-  
-  .mb-span {
-    margin: 0 0 0 20px;
-  }
-  
-  .mb-span.m-0 {
-    margin: 0;
-  }
-  
-  .faq-filter > h2:not(:first-child) {
-    color: var(--grey);
-  }
-  
-  .faq-filter h2 {
-    transition: all 0.3s ease;
-  }
-  
-  .faq-filter > h2:hover {
-    color: #000 !important;
-  }
-  
-  .faq-content {
-    /* min-height: 500px; */
-  }
-  
-  .faq-item {
-    position: relative;
-  }
-  
-  .faq-item::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 12px;
-    margin-right: 20px;
-    content: '+';
-    color: #000;
-    font-size: 24px;
-    transition: transform 0.3s ease;
-    transform-origin: center;
-  }
-  
-  .faq-item[area-expanded='true']::after {
-    transform: rotate(45deg);
-  }
-  
-  .faq-item p:last-child,
-  .faq-item p:nth-child(2) {
-    color: var(--darkgrey);
-    /* margin-top: 10px; */
-  }
-  
-  .faq-item {
-    max-height: min-content;
-    max-height: -moz-min-content;
-    max-height: intrinsic;
-    /* transition: all 0.3s ease; */
-    background-color: var(--lightpink);
-    cursor: pointer;
-  }
-  
-  .faq-item[area-expanded='true'] {
-    max-height: 500px;
-  }
-  
-  .faq-item[area-expanded='false'] p:not(:first-child) {
-    /* display: none; */
-  }
-  
-  .faq-item[area-expanded='true'] p:not(:first-child) {
-    transition: all 0.3s ease;
-  }
-  
-  .faq-question {
-    position: relative;
-  }
-  
-  .faq-question::after {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    content: '';
-    background-image: url('/wp-content/uploads/2020/01/arrow-pink.svg');
-    height: 100%;
-    transition: all 0.3s ease;
-    width: 8.5px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  .faq-item[area-expanded='true'] .faq-question::after {
-    transform: translateY(-50%) rotate(90deg);
-  }
+/* General FAQ Desktop */
+
+.faq-filter {
+	top: 180px;
+}
+
+.faq-filter > h2:not(:first-child) {
+	color: var(--grey);
+}
+
+.faq-filter h2 {
+	transition: all 0.3s ease;
+}
+
+.faq-filter > h2:hover {
+	color: #000 !important;
+}
+
+.faq-content {
+	min-height: 500px;
+}
+
+.faq-item {
+	position: relative;
+	border-radius: 8px;
+	max-height: min-content;
+	max-height: -moz-min-content;
+	max-height: intrinsic;
+	cursor: pointer;
+}
+
+.faq-item::after {
+	/* position: absolute;
+	top: 0;
+	right: 0;
+	margin-top: 12px;
+	margin-right: 20px;
+	content: "+";
+	color: #fff;
+	font-size: 24px;
+	transition: transform 0.3s ease;
+	transform-origin: center; */
+}
+
+.faq-item[area-expanded="true"]::after {
+	/* transform: rotate(45deg); */
+}
+
+.faq-item p:last-child,
+.faq-item p:nth-child(2) {
+	color: #fff;
+	/* margin-top: 10px; */
+}
+
+.faq-item[area-expanded="true"] {
+	max-height: 500px;
+}
+
+.faq-item[area-expanded="false"] p:not(:first-child) {
+	/* display: none; */
+}
+
+.faq-item[area-expanded="true"] p:not(:first-child) {
+	/* transition: all 0.3s ease; */
+}
+
+.faq-item[area-expanded="true"] h2, .faq-item:hover h2 {
+	color: var(--mainColor);
+}
+
+
+.faq-item[area-expanded="true"]::after {
+	color: var(--mainColor);
+}
+
+.faq-question {
+	position: relative;
+}
+
+.faq-question::after {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	content: "";
+	/* background-image: url("/wp-content/uploads/2020/01/arrow-pink.svg"); */
+	height: 100%;
+	transition: all 0.3s ease;
+	width: 8.5px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.faq-item[area-expanded="true"] .faq-question::after {
+	transform: translateY(-50%) rotate(90deg);
+}
+
+.faq-answer {
+	max-height: 0;
+	opacity: 0;
+}
+
+/* End FAQ */
   
   .pre-load {
     position: fixed;
