@@ -1,6 +1,11 @@
 let pageName = document.querySelector('[data-barba=container]');
 let preLoad = document.querySelectorAll('.pre-load > div:not(:last-child)');
 let header = document.querySelector('header')
+let preloaderCaption = document.querySelector('.pre-load div > span');
+let loadingCaption = document.querySelector('.pre-load div p');
+let menuTl;
+let menu;
+
 
 
 const runScripts = () => {
@@ -12,56 +17,54 @@ const runScripts = () => {
 runScripts();
 
 const moreAnchors = () => {
-  let allAnchors = [];
+  let anchors = Array.prototype.slice.call(document.querySelectorAll('.anchors, a'));
   let cursor = document.querySelector('.cursor');
-  let newAnchors = Array.prototype.slice.call(document.querySelectorAll('.anchors'));
-  let newA = Array.prototype.slice.call(document.querySelectorAll('a'));
-  anchors = allAnchors.concat(newAnchors);
-  anchors = allAnchors.concat(newA);
-
+  cursor.classList.remove('dn');
   let xLocation;
   let yLocation;
-
+  
   const hoverCursor = () => {
     cursor.classList.add('is-hover');
   };
-
+  
   const removeHoverCursor = () => {
     cursor.classList.remove('is-hover');
     cursor.classList.remove('is-shop');
     cursor.classList.remove('add-cart');
   };
-
+  
   anchors.forEach((anchor) => {
     anchor.addEventListener('mouseover', () => {
-        hoverCursor();
+      hoverCursor();
     });
-  });
-
-  anchors.forEach((anchor) => {
+  
     anchor.addEventListener('mouseleave', () => {
       removeHoverCursor();
     });
   });
 
-
+  let distanceFromTop = 0;
+  
   const moveCursor = (x, y) => {
     cursor.style.top = y + 'px';
     cursor.style.left = x + 'px';
+  
+    // Calculate the distance between cursor and top of the screen
+    distanceFromTop = y - window.pageYOffset;
+    
   };
-
+  
   document.addEventListener('mousemove', (event) => {
     moveCursor(event.pageX, event.pageY);
     xLocation = event.pageX;
     yLocation = event.pageY;
-
   });
-
+  
   document.addEventListener('scroll', (event) => {
-    console.log(xLocation, yLocation, 'scroll')
-    moveCursor(xLocation, yLocation);
+    moveCursor(xLocation, distanceFromTop + window.pageYOffset);
+    console.log('Distance from top:', distanceFromTop);
+    console.log('yOffset:', window.pageYOffset);
   });
-
 
 };
 
@@ -149,3 +152,140 @@ const faqQuestions = () => {
 }
 
 faqQuestions();
+
+barba.init({
+  timeout: 3000,
+  prevent: ({ el }) => el.classList.contains('barba-prevent'),
+  transitions: [
+    {
+      leave({ current, next, trigger }) {
+       
+        header.classList.remove('scrolled');
+        header.classList.add('loading');
+        document.querySelector("header").classList.remove('menu-open')
+
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        // menuTL.reverse();
+        
+        setTimeout(() => {
+          // menu.classList.add('o-0');
+          // menu.classList.add('pointers-none');
+        }, 1200);
+
+      }
+        return new Promise((resolve) => {
+
+          // Set Pre Loader Defaults
+
+          // randomPhrases();
+        
+          const loadEnter = gsap.timeline({
+            defaults: {
+              ease: "power4.inOut",
+              duration: 0.8
+            },
+            onComplete() {
+              current.container.remove();
+              resolve();
+            },
+          }) 
+          // Animate Pre Load
+          loadEnter
+          .call (()=> {
+              // loadingCaption.innerHTML = originalCaption;
+          })
+          .set(loadingCaption, {opacity: 0})
+          .set(preloaderCaption, {y: "120%"})
+          .set(preLoad,{ y: "110%"})
+          .to(preLoad,{ y: "0%", stagger: 0.05})
+          .to(preloaderCaption, {y: "0%"},0.2)
+          .to(loadingCaption, {opacity: 1}, 0.2)
+
+        });
+      },
+      afterEnter({ current, next, trigger }) {
+        return new Promise((resolve) => {
+          window.scrollTo({
+            top: 0,
+          });
+          runScripts();
+          const loadLeave = gsap.timeline({
+            onComplete() {
+              resolve();
+              header.classList.remove('loading');
+              // header.classList.add('scrolled');
+
+            },
+            defaults: {
+              duration: .8,
+              ease: Expo.easeOut,
+              delay: 2
+            },
+          });
+
+          loadLeave
+      
+          .to(loadingCaption, {opacity: 0})
+          .to(preloaderCaption, {y: "-130%"},0.4)    
+          .call (()=> {
+            // loadingCaption.innerHTML = "Loaded!"
+        })
+          .to(preLoad,{ y: "-110%", stagger: 0.05}, 0.4)
+        });
+      },
+    },
+
+  ],
+  views: [
+  ],
+  debug: true,
+});
+
+
+const randomPhrases = () => {
+
+  let phrases = [
+    'Our chief aim is to improve the lives of others and enable greatness in everyone and everything we touch.',
+    'We are best in the world at using innovation and disruptive new models to build personal and lifestyle brands',
+    'We are a purpose driven organization that looks to lead with compassion not judgment, humility not ego, and love not fear.'
+  ]
+  let n = Math.floor(Math.random() * (phrases.length))
+  preloaderCaption.innerHTML = phrases[n];
+}
+
+
+const animatePreLoader = () => {
+
+  // randomPhrases();
+  const preloadTl = gsap.timeline({
+    defaults: {
+      ease: "power4.inOut",
+      duration: 0.8
+    }
+  }) 
+
+    let t;
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) { 
+      t = '-130%';
+    } else {
+      t = "-190%";
+    }
+
+  preloadTl
+  .call (()=> {
+      // loadingCaption.innerHTML = "Loaded!"
+  })
+  .to(loadingCaption, {opacity: 0})
+  .to(preloaderCaption, {y: t},0.4)
+  .to(preLoad,{ y: "-110%", stagger: 0.05}, 0.4)
+
+
+  preloadTl.paused(true);
+
+
+    window.addEventListener('load', (event) => {
+     preloadTl.play();
+    })
+}
+
+animatePreLoader();

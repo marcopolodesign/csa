@@ -1,5 +1,5 @@
 <?php
-if( have_rows('itnova_blocks') ): while ( have_rows('itnova_blocks') ) : the_row();
+if( have_rows('reusable') ): while ( have_rows('reusable') ) : the_row();
       
 if( get_row_layout() == 'texto_&_imagen' ):
     $layout = get_sub_field('layout');
@@ -114,101 +114,147 @@ if( get_row_layout() == 'texto_&_imagen' ):
         </div>
     </div>
 
-<?php endif;endwhile;  endif; ?>
+<?php elseif(get_row_layout() == 'intro_section') : 
 
+    $margin = get_sub_field('margins');
+    $padding = get_sub_field('padding');
+    ?>
 
+    <div class="intro-section flex column-mobile jic <?php echo $padding .' '; echo $margin; ?>">
+        <div class="intro-video bg-red mb5 w-50-ns" style="background-image: url(<?php the_sub_field('intro_image');?>);"></div>
+        <div class="intro-text w-40-ns pl6-ns">
+            <p class="lh-copy white mb4"><?php the_sub_field('intro_text');?></p>
 
-<div class="starter-secondary-page container pv5 <?php echo $padding .' '; echo $margin; ?>">
-    <div class="starter-title flex jic pb5">
-        <h2 class="main-color w-40-ns f1">Healthcare & Senior Housing.</h2>
-        <p class="lh-copy w-50-ns fw1 f3">Communities is a complex process made easier by our specially trained staff.</p>
-    </div>
-    <div class="heading-line"></div>
-
-    <div class="flex justify-between pv5">
-        <div class="starter-bg-img w-20-ns">
-            <img src="/wp-content/uploads/2023/06/Group-4.jpg">
+            <a class="main-cta main-color-bg">Get in touch</a>
         </div>
 
-        <div class="flex flex-column jic w-50-ns">
-            <!-- Start reusable -->
-            <?php for ($i=0; $i < 3; $i++) : ?>
-                <div class="category-info">
-                    <div class="faq-item pv4" area-expanded="false">
-                        <div class="flex jic mb3">
-                            <h2 class="white fw3 faq-question f3 smooth-t">Aquiring loans for Skilled nursing<?php the_sub_field('question'); ?></h2>
-                            <div class="faq-arrow flex">
-                                <svg class="m-auto smooth-t" width="16" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                   <path d="M6.35083 0.396667L6.35083 14.6404" stroke="#B6FD87" stroke-width="0.954451"/>
-                                   <path d="M0.861572 9.15112L6.35077 14.6403L11.84 9.15112" stroke="#B6FD87" stroke-width="0.954451"/>
-                                </svg>
+        <div class="intro-img relative w-10-ns mt5-ns">
+            <div class="absolute-cover cover bg-center" style="background-image: url(<?php the_sub_field('intro_bg');?>);"></div>
+        </div>
+    </div>
+
+
+
+<?php elseif(get_row_layout() == 'starter_secondary_page') : 
+    
+    $margin = get_sub_field('margins');
+    $padding = get_sub_field('padding');
+    ?>
+
+    <div class="starter-secondary-page container pv5 <?php echo $padding .' '; echo $margin; ?>">
+        <div class="starter-title flex jic pb5">
+            <h2 class="main-color w-40-ns f1">Healthcare & Senior Housing.</h2>
+            <p class="lh-copy w-50-ns fw1 f3">Communities is a complex process made easier by our specially trained staff.</p>
+        </div>
+        <div class="heading-line"></div>
+
+        <div class="flex justify-between pv5">
+            <div class="starter-bg-img w-20-ns">
+                <img src="/wp-content/uploads/2023/06/Group-4.jpg">
+            </div>
+
+            <div class="flex flex-column jic w-50-ns">
+                <!-- Start reusable -->
+                <?php if( have_rows('category_cases') ): while ( have_rows('category_cases') ): the_row(); if (get_sub_field('title')): ?>
+                    <div class="category-info">
+                        <div class="faq-item pv4" area-expanded="false">
+                            <div class="flex jic mb3">
+                                <h2 class="white fw3 faq-question f3 smooth-t"><?php the_sub_field('title'); ?></h2>
+                                <div class="faq-arrow flex">
+                                    <svg class="m-auto smooth-t" width="16" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.35083 0.396667L6.35083 14.6404" stroke="#B6FD87" stroke-width="0.954451"/>
+                                    <path d="M0.861572 9.15112L6.35077 14.6403L11.84 9.15112" stroke="#B6FD87" stroke-width="0.954451"/>
+                                    </svg>
+                                </div>
                             </div>
+                        
+                            <div class="faq-answer lh-copy">
+                            <?php the_sub_field('text'); ?>
+                            </div>  
                         </div>
-                       
-                        <div class="faq-answer lh-copy">
-                        <p>Text explaining what the answer is about, specially with this new container which then will be later on filled with new info directly from the backend<?php the_sub_field('answer'); ?></p>
-                        </div>  
                     </div>
-                </div>
-                <div class="heading-line"></div>
-            <?php endfor; ?>
+                    <div class="heading-line"></div>
+                <?php endif; endwhile; endif; ?>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="intro-section flex column-mobile jic <?php echo $padding .' '; echo $margin; ?>">
-    <div class="intro-video bg-red mb5 w-50-ns" style="background-image: url('/wp-content/uploads/2023/06/pexels-taro-5595352-1.jpg');"></div>
-    <div class="intro-text w-40-ns pl6-ns">
-        <p class="lh-copy white mb4">CSA operates with the mindset of the property owner. Our actions and thought process along the way are more reflective of the operator, with the ultimate goal of securing financing for the project.</p>
 
-        <a class="main-cta main-color-bg">Get in touch</a>
-    </div>
+<?php elseif(get_row_layout() == 'expertise') : 
 
-    <div class="intro-img relative w-10-ns mt5-ns">
-        <div class="absolute-cover cover bg-center" style="background-image: url('/wp-content/uploads/2023/06/Group-4.jpg');"></div>
-    </div>
-</div>
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
 
 <div class="expertise-container container <?php echo $padding .' '; echo $margin; ?>">
     <p class="main-color ttu f6 mb5">Main areas of expertise</p>
 
+    <?php if( have_rows('expertise_area') ): while ( have_rows('expertise_area') ): the_row(); ?>
     <div class="expertise flex smooth-t not-active relative">
         <span class="main-color-bg db smooth-t"></span>
         <div class="expertise-content pl5 smooth-t relative z-2">
-            <h2 class="main-color f0 mb4">Healthcare industry</h2>
-            <p class="f4 fw3 lh-copy measure-wide smooth-t">Acquiring loans for Skilled Nursing, Assisted or Independent Living, Memory Care or Continuing Care Retirement Communities is a complex process made easier by our specially trained staff.</p>
-            <a href="#" class="ttu mt4 white no-deco flex items-center smooth-t"><p class="mr2">Learn more</p> <?php get_template_part('template-parts/content/arrow');?></a>
+            <?php the_sub_field('content');?>
+            <a href=<?php the_sub_field('expertise_link');?> class="ttu mt4 white no-deco flex items-center smooth-t"><p class="mr2">Learn more</p> <?php get_template_part('template-parts/content/arrow');?></a>
         </div>
 
-        <div class="absolute expertise-bg smooth-t" style="background-image: url('/wp-content/uploads/2023/06/pexels-taro-5595352-1.jpg');"></div>
-
-
+        <div class="absolute expertise-bg smooth-t" style="background-image: url(<?php the_sub_field('expertise_image');?>);"></div>
     </div>
 
-    <div class="expertise flex not-active smooth-t relative mt4">
-        <span class="main-color-bg db smooth-t"></span>
-        <div class="expertise-content pl5 smooth-t relative z-2">
-            <h2 class="main-color f0 mb4">Commercial Real Estate</h2>
-            <p class="f4 fw3 lh-copy measure-wide smooth-t">Acquiring loans for Skilled Nursing, Assisted or Independent Living, Memory Care or Continuing Care Retirement Communities is a complex process made easier by our specially trained staff.</p>
-            <a href="#" class="ttu mt4 white no-deco flex items-center smooth-t"><p class="mr2">Learn more</p> <?php get_template_part('template-parts/content/arrow');?></a>
-        </div>
-
-        <div class="absolute expertise-bg smooth-t" style="background-image: url('/wp-content/uploads/2023/06/pexels-taro-5595352-1.jpg');"></div>
-    </div>
+    <?php endwhile; endif; ?>
 </div>
+
+
+<?php elseif(get_row_layout() == 'heading_text') : 
+
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
+
 
 <div class="heading-text container mt7">
     <div class="flex jic">
-        <h2 class="main-color mr5 f1">About Us</h2>
+        <h2 class="main-color mr5 f1"><?php the_sub_field('title');?></h2>
         <div class="heading-line"></div>
     </div>
 
     <div class="pv4 flex jic">
-        <h3 class="f2 w-50-ns fw3">Capital Stack Advisors is a full service, boutique firm dealing in commercial real estate finance and equity.</h3>
-        <p class="w-50-ns pl5-ns fw3">Our advisors are skilled in the art of closing the deal. We work hand-in-hand with all parties involved to ensure that your vision becomes a reality. From appraisal to underwriting to loan committee and closing, we are there, making the process as seamless as possible.Our highly trained and creative staff has but one goal, to help our clients achieve success. We partner with you to bring innovative financial solutions to help you succeed at all your financing endeavors.</p>
+       <?php the_sub_field('content');?>
     </div>
 </div>
+
+<?php elseif(get_row_layout() == 'carrousel') : 
+
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
+
+<div class="case-study-uses w-100  pv5 <?php echo $padding .' '; echo $margin; ?>">
+    <h2 class="main-color f1 mb3 container-left"><?php the_sub_field('title');?></h2>
+    <p class="lh-copy f5 container-left measure-wide fw1"><?php the_sub_field('text');?></p>
+
+    <div class="w-100 overflow-x-scroll">
+        <div class="flex column-mobile w-max container-left mt4">
+        <?php if( have_rows('carrousel_content') ): while ( have_rows('carrousel_content') ): the_row(); ?>
+                <div class="case-use flex flex-column mr5">
+                    <div class="case-img relative">
+                        <img class="relative z-2" src="/wp-content/uploads/2023/06/pexels-taro-5595352-1.jpg">
+                        <div class="<?php the_sub_field('gradient_bg');?> gradient absolute-cover"></div>
+                    </div>
+
+                    <?php the_sub_field('content');?>
+                </div>
+            <?php endwhile; endif; ?>
+        </div>
+    </div>
+ 
+</div>
+
+
+<?php endif;endwhile;  endif; ?>
+
+
+
 
 <div class="numbers container <?php echo $padding .' '; echo $margin; ?>">
     <div class="numbers-inner flex justify-between pv4">
@@ -234,27 +280,7 @@ if( get_row_layout() == 'texto_&_imagen' ):
     
 </div>
 
-<div class="case-study-uses w-100  pv5 <?php echo $padding .' '; echo $margin; ?>">
-    <h2 class="main-color f1 mb3 container-left">Healthcare Case Studies</h2>
-    <p class="lh-copy f5 container-left measure-wide fw1">Over a decade of providing specialty services has allowed us to cultivate unique relationships with direct lenders. By working with us you get greater flexibility, more options and customized services, including:</p>
 
-    <div class="w-100 overflow-x-scroll">
-        <div class="flex column-mobile w-max container-left mt4">
-            <?php for ($i = 0; $i < 10; $i++) : ?>
-                <div class="case-use flex flex-column mr5">
-                    <div class="case-img relative">
-                        <img class="relative z-2" src="/wp-content/uploads/2023/06/Screenshot-2023-04-19-at-19.28-1.jpg">
-                        <div class="main-gradient-bg absolute-cover"></div>
-                    </div>
-
-                    <h3 class="fw4 mb2 mt4 f2 pr4">These can be a case study on HC</h3>
-                    <p class="lh-copy fw1">Acquiring loans for Skilled Nursing, Assisted or Independent Living, Memory Care or Continuing Care Retirement Communities is a complex process made easier by our specially trained staff.</p>
-                </div>
-            <?php endfor; ?>
-        </div>
-    </div>
- 
-</div>
 
 <div class="testimonials-container secondary-gradient-bg pv6 mt5 <?php echo $padding .' '; echo $margin; ?>">
     <h2 class="f1 black tc">Testimonials</h2>
@@ -290,7 +316,7 @@ if( get_row_layout() == 'texto_&_imagen' ):
 .case-use {
     width: 30vw;
 }
-.case-img .main-gradient-bg {
+.case-img .gradient {
     transform: translate(4%, 3.75%);
 }
 

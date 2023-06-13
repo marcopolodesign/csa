@@ -143,6 +143,32 @@ header.scrolled .header-nav li:last-child a {
     color: var(--secondaryDarkColor)
 }
 
+
+/* Pre Loader Animation */
+.preload div span {
+    transform: translateY(110%);
+   }
+
+
+   .pre-load {
+    /* display: none !important;  */
+   }
+
+   .pre-load > div:not(:last-child){
+    width: 33.33333%;
+   }
+
+   .pre-load span.f0 {
+    letter-spacing: 1px !important;
+   }
+
+   .pre-load p span {
+    animation: grow 10s infinite;
+    background: #fff;
+    height: 1px;
+    display: block;
+   }
+
 /* Home */
 
 
