@@ -30,10 +30,18 @@
 	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 container-xs pv3">
 
 		<a class="logo" href="/">
-			<?php get_template_part('template-parts/content/logo');?>
+			<?php if (is_mobile_device()) {
+				get_template_part('template-parts/content/logo-mobile');
+			} else {
+				get_template_part('template-parts/content/logo');
+			} ?>
 		</a>
 
-		<div class="header-aob flex items-center">
+		<div class="mobile">
+			<p class="black">Menu</p>
+		</div>
+
+		<div class="header-aob flex items-center desktop">
 
 			<?php
 			
@@ -53,6 +61,8 @@
 		</div>
 
 
+
+
 	</header><!-- #masthead -->
 
 
@@ -62,9 +72,9 @@
 		<div class="bg-main-dark-color"></div>
 		<div class="bg-main-dark-color"></div>
 		<div class="bg-main-dark-color"></div>
-		<div class="bg-main-dark-color"></div>
-		<div class="bg-main-dark-color"></div>
-		<div class="bg-main-dark-color"></div>
+		<div class="bg-main-dark-color desktop"></div>
+		<div class="bg-main-dark-color desktop"></div>
+		<div class="bg-main-dark-color desktop"></div>
 		<div class="m-auto white absolute-center overflow-hidden tc w-80">
 			<!-- <p class="f5 fw3 flex tc items-center justify-center main-color">Page is <span class="mh3"></span> loading</p> -->
 			<span class="db druk f0 ttu fw3 mv4 main-color"></span>

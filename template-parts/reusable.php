@@ -1,3 +1,6 @@
+<div class="reusable-content">
+
+
 <?php
 if( have_rows('reusable') ): while ( have_rows('reusable') ) : the_row();
       
@@ -198,7 +201,7 @@ $padding = get_sub_field('padding');
             <a href=<?php the_sub_field('expertise_link');?> class="ttu mt4 white no-deco flex items-center smooth-t"><p class="mr2">Learn more</p> <?php get_template_part('template-parts/content/arrow');?></a>
         </div>
 
-        <div class="absolute expertise-bg smooth-t" style="background-image: url(<?php the_sub_field('expertise_image');?>);"></div>
+        <div class="absolute expertise-bg smooth-t bg-center cover" style="background-image: url(<?php the_sub_field('expertise_image');?>);"></div>
     </div>
 
     <?php endwhile; endif; ?>
@@ -234,7 +237,7 @@ $padding = get_sub_field('padding');
     <p class="lh-copy f5 container-left measure-wide fw1"><?php the_sub_field('text');?></p>
 
     <div class="w-100 overflow-x-scroll">
-        <div class="flex column-mobile w-max container-left mt4">
+        <div class="flex w-max container-left mt4">
         <?php if( have_rows('carrousel_content') ): while ( have_rows('carrousel_content') ): the_row(); ?>
                 <div class="case-use flex flex-column mr5">
                     <div class="case-img relative">
@@ -251,30 +254,65 @@ $padding = get_sub_field('padding');
 </div>
 
 
-<?php endif;endwhile;  endif; ?>
+<?php elseif(get_row_layout() == 'testimonials') : 
 
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
+
+
+
+<div class="testimonials-container secondary-gradient-bg pv6 mt5 <?php echo $padding .' '; echo $margin; ?>">
+    <h2 class="f1 black tc"><?php the_sub_field('title_section');?></h2>
+
+    <div class="w-100 overflow-x-scroll mt5">
+            <div class="flex w-max container">
+
+            <?php if( have_rows('testimonial_content') ): while ( have_rows('testimonial_content') ): the_row(); ?>
+                <div class="testimonial flex flex-column mr5">
+                    <div class="testimonial-text mv4 pr5 pb4 black measure-wide lh-copy">
+                       <?php the_sub_field('testimonial');?>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <p class="main-color tc testimonial-author bg-black inline-flex"><?php the_sub_field('author');?></p>
+                    </div>
+                </div>
+        <?php endwhile; endif; ?>
+            </div>
+    </div>
+    
+</div>
+
+
+<?php elseif(get_row_layout() == 'numbers') : 
+
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
 
 
 
 <div class="numbers container <?php echo $padding .' '; echo $margin; ?>">
     <div class="numbers-inner flex justify-between pv4">
         <div class="w-40-ns big-n flex flex-column justify-center">
-            <h2 class="main-color f0">+10</h2>
-            <p class="tc f3">years of experience</p>
+            <h2 class="main-color f0"><?php the_sub_field('big_number');?></h2>
+            <p class="tc f3"><?php the_sub_field('big_number_caption');?></p>
         </div>
+
 
         <div class="w-50-ns  flex flex-column justify-around">
-            <div class="flex items-center small-n">
-                <h3 class="main-color f0 fw4">+2.3M</h3>
-                <p class="f2 lh1 pl3">Dairy problems solved*</p>
-            </div>
 
-            <div class="heading-line"></div>
+        <?php if( have_rows('small_numbers') ): while ( have_rows('small_numbers') ): the_row(); ?>
 
             <div class="flex items-center small-n">
-                <h3 class="main-color f0 fw4">+70</h3>
-                <p class="f2 lh1 pl3">Projects founded</p>
+                <h3 class="main-color f0 fw4"><?php the_sub_field('small_number');?></h3>
+                <p class="f2 lh1 pl3"><?php the_sub_field('small_number_caption');?></p>
             </div>
+
+            <div class="heading-line desktop"></div>
+
+        <?php endwhile; endif; ?>
         </div>
     </div>
     
@@ -282,29 +320,142 @@ $padding = get_sub_field('padding');
 
 
 
-<div class="testimonials-container secondary-gradient-bg pv6 mt5 <?php echo $padding .' '; echo $margin; ?>">
-    <h2 class="f1 black tc">Testimonials</h2>
+<?php elseif(get_row_layout() == 'numbers_grid') : 
 
-    <div class="w-100 overflow-x-scroll mt5">
-            <div class="flex w-max container">
+$margin = get_sub_field('margins');
+$padding = get_sub_field('padding');
+?>
 
-            <?php for ($i=0; $i < 3; $i++) { ?>
-                <div class="testimonial flex flex-column mr5">
-                    <div class="testimonial-text mv4 pr5 pb4 black measure-wide lh-copy">
-                        Navigating financing in the Healthcare industry can be tricky. Capital Stack gave us more guidance and help than we knew we needed. Their prompt friendly, but yet businesslike approach was refreshing. Our Advisor understood our goals and more importantly helped us achieve them. They are our go-to firm going forward.
-                    </div>
 
-                    <div class="overflow-hidden">
-                        <p class="main-color tc testimonial-author bg-black inline-flex">C.M. CEO, Paramount</p>
-                    </div>
-                </div>
-        <?php } ?>
+<div class="numbers-grid container <?php echo $padding .' '; echo $margin; ?> w-100">
+    <div class="numbers-inner flex justify-between pv4-ns">
+        <?php if( have_rows('grid_content') ): while ( have_rows('grid_content') ): the_row(); ?>
+            <div class="flex flex-column items-center small-n mh3">
+                <h3 class="main-color f0 fw4"><?php the_sub_field('number');?></h3>
+                <p class="f3 fw3 lh1 tc"><?php the_sub_field('number_caption');?></p>
             </div>
+        <?php endwhile; endif; ?>
     </div>
-    
 </div>
 
 
+<?php endif;endwhile;  endif; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<h2 class="white f2 mb4 tc mt6">US tresuries rates</h2>
+<div id="table-container" class="container-xl flex jic pb5"></div>
+
+</div>
+<!-- <canvas class="bg-white container" id="chart"></canvas> -->
+
+
+<script>
+
+function formatDate(date) {
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  return formattedDate;
+}
+
+// Fetch and process XML data
+fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value_month=202307')
+  .then(response => response.text())
+  .then(xmlData => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlData, 'application/xml');
+
+    // Get all entry elements from the XML
+    const entries = xmlDoc.querySelectorAll('entry');
+    console.log(entries);
+
+    let tableHtml = '<table style="border-collapse: collapse; width: 100%; text-align: center;">';
+    tableHtml += '<tr style="border-bottom: 1px solid #ccc;"><th style="padding: 10px;">Date</th><th style="padding: 10px;">1 YR</th><th style="padding: 10px;">2 YR</th><th style="padding: 10px;">3 YR</th><th style="padding: 10px;">5 YR</th><th style="padding: 10px;">7 YR</th><th style="padding: 10px;">10 YR</th><th style="padding: 10px;">20 YR</th><th style="padding: 10px;">30 YR</th></tr>';
+
+    // Get today's date, tomorrow's date, and 30 days ago
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // Extract data from each entry
+    entries.forEach((entry, index) => {
+    console.log(entry)
+      const properties = entry.getElementsByTagName('m:properties')[0];
+      const date = new Date(properties.getElementsByTagName('d:NEW_DATE')[0].textContent);
+
+
+      // only showcase today's date 
+
+      console.log(date , today);
+      
+        const formattedDate = formatDate(date); // Format the date
+
+        const oneYearRate = parseFloat(properties.getElementsByTagName('d:BC_1YEAR')[0].textContent);
+        const twoYearRate = parseFloat(properties.getElementsByTagName('d:BC_2YEAR')[0].textContent);
+        const threeYearRate = parseFloat(properties.getElementsByTagName('d:BC_3YEAR')[0].textContent);
+        const fiveYearRate = parseFloat(properties.getElementsByTagName('d:BC_5YEAR')[0].textContent);
+        const sevenYearRate = parseFloat(properties.getElementsByTagName('d:BC_7YEAR')[0].textContent);
+        const tenYearRate = parseFloat(properties.getElementsByTagName('d:BC_10YEAR')[0].textContent);
+        const twentynYearRate = parseFloat(properties.getElementsByTagName('d:BC_20YEAR')[0].textContent);
+        const thirtyYearRate = parseFloat(properties.getElementsByTagName('d:BC_30YEAR')[0].textContent);
+
+
+
+        tableHtml += `<tr style="border-bottom: 1px solid #ccc;"><td style="padding: 10px;">${formattedDate}</td><td style="padding: 10px;">${oneYearRate}%</td><td style="padding: 10px;">${twoYearRate}%</td><td style="padding: 10px;">${threeYearRate}%</td><td style="padding: 10px;">${fiveYearRate}%</td><td style="padding: 10px;">${sevenYearRate}%</td><td style="padding: 10px;">${tenYearRate}%</td><td style="padding: 10px;">${twentynYearRate}%</td><td style="padding: 10px;">${thirtyYearRate}%</td></tr>`;
+      
+    });
+
+    tableHtml += '</table>';
+    const container = document.getElementById('table-container');
+    container.innerHTML = tableHtml;
+
+  })
+  .catch(error => {
+    console.error('Error fetching XML data:', error);
+  });
+
+
+
+
+  function createChart(dates, rates) {
+  const ctx = document.getElementById('chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [{
+        label: 'US Treasuries Interest Rates',
+        data: rates,
+        borderColor: 'blue',
+        fill: false
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Date'
+          }
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Interest Rate'
+          }
+        }
+      }
+    }
+  });
+}
+
+
+</script>
 
 
 <style>
@@ -423,6 +574,11 @@ $padding = get_sub_field('padding');
 }
 
 
+.numbers-inner .heading-line:last-child {
+    display: none;
+}
+
+
 /* Numbers Desktop */
 
 .numbers-inner {
@@ -461,7 +617,200 @@ $padding = get_sub_field('padding');
 }
 
 
+@media (max-width:1200px) {
+    .small-n {
+        flex-direction: column
+    }
 
+    .small-n p {
+        text-align: center;
+        padding-left: 0px;
+    }
+
+    .big-n .f0 {
+        font-size: 12rem;
+    }
+
+    .small-n {
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .small-n .f0 {
+        font-size: 4rem;
+    }
+
+    /* Start Intro text mid size */
+
+    .intro-text {
+        padding: 0px 30px;
+    }
+
+    .intro-img {
+        display: none;
+    }
+
+}
+
+@media (max-width: 820px) {
+
+    .container-xl {
+        padding: 0px 60px;
+    }
+
+    .reusable-content > div {
+        margin: 0px 0px 40px;
+    }
+
+    .numbers-inner {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .numbers-inner > div {
+        width: 100%;
+        text-align: center
+    }
+
+    .expertise.not-active {
+        max-width: 100%;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .expertise > div {
+        width: 100%;
+    }
+
+    .not-active .expertise > span {
+        display: none;
+    }
+
+    .not-active .expertise-content {
+        padding-left: 0px !important;
+    }
+
+    .expertise.not-active .expertise-content p, .expertise.not-active .expertise-content a {
+        opacity: 1;
+        max-height: unset; 
+    }
+
+    .expertise.not-active .expertise-bg {
+        position: relative;
+        clip-path: inset(0) !important;
+        top: 0;
+        right: 0;
+        margin-top: 30px
+    }
+
+    .heading-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .heading-text > div:last-child {
+        flex-direction: column;
+    }
+
+    .heading-text > div:last-child > * {
+        width: 100%;
+    }
+
+    .heading-text p {
+        padding-left: 0px;
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 580px) {
+
+    header.container-xs {
+        padding: 20px;
+    }
+
+    .page-starter {
+        height: 50vh;
+        display: flex
+    }
+
+    .page-starter > div.container {
+        margin: auto;
+        margin-bottom: 0px;
+        margin-left: 0;
+    }
+
+    .page-starter h1.f0 {
+        font-size: 1.8rem;
+    }
+
+    .starter-arrow svg {
+        width: 50px; height: auto
+    }
+    
+    .f0, h1.f0, h2.f0, h3.f0, h4.f0, h5.f0, h6.f0 {
+        font-size: 2.8rem;
+    }
+
+    .big-n .f0 {
+    font-size: 4rem;
+    }
+
+    .big-n {
+        margin: 20px auto;
+    }
+
+    .big-n p.f2 {
+    font-size: 1.5rem;
+        }
+    .testimonials-container > h2 {
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .testimonial {
+    max-width: 80vw;
+    border-top: 0px;
+    margin-right: 30px;
+    }
+
+    .testimonial-text{
+        padding-right: 20px;
+    }
+
+    .testimonial-author {
+    padding: 10px;
+    }
+
+    #table-container {
+        padding: 60px 20px;
+        padding-top: 0px;
+        width: 100%;
+        overflow: scroll;
+    }
+
+    .starter-secondary-page {
+        margin-top: 100px !important;
+    }
+
+    .starter-secondary-page > div {
+        flex-direction: column;
+    }
+
+    .starter-secondary-page  p {
+        margin-top: 10px;
+    }
+
+    .starter-bg-img {
+        display: none;
+    }
+
+    .case-use {
+        max-width: 75vw;
+        margin-right: 3rem;
+        width: unset;
+    }
+}
 
 
 </style>

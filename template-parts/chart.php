@@ -1,0 +1,1 @@
+<a href=""><img src="https://s3.amazonaws.com/gurufocus_charts/yieldChart_curve_chart_top_container.png"/></a>

@@ -222,6 +222,12 @@
   header .main-cta:hover {
     /* background: var(--mainGradient) !important; */
   }
+
+  /* Header Dark / light modes */
+
+  header.light li a {
+    color: #fff !important;
+  }
   
   body {
     /* cursor: none; */
@@ -523,7 +529,13 @@
   .column-reverse {
     flex-direction: column-reverse;
   }
-  
+
+  /* Hover animations */
+
+  .hover-main-color:hover {
+    color: var(--mainColor);
+  }
+
   @media (min-width: 1440px) {
     .container {
       max-width: 1520px;

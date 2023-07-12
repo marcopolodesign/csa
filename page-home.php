@@ -10,10 +10,10 @@ html {
 }
 </style>
 
-<div data-barba="container" class="home bg-black" data-barba-namespace="home">
+<div data-barba="container" class="home bg-black" data-barba-namespace="home" data-header-color="dark">
     <div class="page-starter main-gradient-bg pv6 relative">
         <div class="container pt4">
-        <h1 class="black f0">Laying the foundation for<br><b>sustained success</b></h1>
+        <h1 class="black f0 typeit">Laying the foundation for<br><b><span>sustained success</span></b></h1>
         </div>
 
         <div class="absolute bottom-0 right-0 starter-arrow">

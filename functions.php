@@ -187,3 +187,20 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+
+function is_mobile_device() {
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $mobile_agents = array(
+        'Mobile', 'Android', 'iPhone', 'iPad', 'BlackBerry',
+        'Windows Phone', 'Opera Mini', 'IEMobile', 'Mobile Safari'
+    );
+
+    foreach ($mobile_agents as $agent) {
+        if (stripos($user_agent, $agent) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}

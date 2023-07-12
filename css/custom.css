@@ -88,7 +88,7 @@ header.container-xs {
 }
 
 header.scrolled {
-    background-color: #ffffff11;
+    background-color: #000;
     backdrop-filter: blur(100px)
 }
 
@@ -200,4 +200,117 @@ header.scrolled .header-nav li:last-child a {
 
 .category-info:hover .faq-arrow svg path {
     stroke: var(--mainDarkColor);
+}
+
+
+.article-grid-full:first-child {
+    margin-top: 0;
+}
+
+.article-grid-full {
+    height: 70vh;
+}
+
+.article-grid-full:hover {
+    transform: scale(.98)
+}
+
+
+.article-grid-full:hover .absolute-cover{
+    transform: scale(1.03)
+}
+
+.article-grid-child > div:first-child {
+    clip-path: inset( 0 0 100% 0);
+}
+
+
+.article-grid-child:hover > div:first-child {
+    clip-path: inset(0);
+}
+
+.article-grid-child:hover h2, .article-grid-child:hover .heading-line {
+    color: var(--mainColor);
+}
+
+
+.tags-container {
+    gap: 2rem;
+}
+
+.tags-container p {
+    border-radius: 100px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.50);
+    padding: 10px 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tags-container p:hover {
+    background-color: var(--mainColor);
+    color: var(--mainDarkColor);
+    padding: 10px 30px;
+    transform-origin: left;
+}
+
+.article-video-text {
+    border: 1px solid var(--mainColor);
+    border-left: 0;
+}
+
+/* Post */
+
+.post-content-inner p, .post-contnt-inner li, .post-content-inner a, .post-content-inner ol {
+    font-size: 18px;
+    line-height: 2.1;
+    font-weight: 300;
+}
+
+.post-content-inner a {
+    font-weight: 600;
+    color: var(--mainColor)
+}
+
+.post-content-inner h1 {
+    font-size: 2.5rem;
+    color: var(--mainColor);
+    padding: 3rem 0;
+}
+
+.last-sharer {
+ border-top: 1px solid var(--mainColor)
+}
+
+.related-projects > a:first-child {
+    margin-top: 0px;
+}
+
+.related-projects > a:first-child div.w-60-ns  {
+    padding-top: 0px
+}
+
+.related-projects a, .related-projects a div.w-60-ns {
+    margin: 15px 0px;
+    padding-top: 0px
+}
+
+
+@media (max-width: 580px) {
+
+
+    /* Header Mobile */
+
+    header.container-xs.scrolled {
+        padding: 20px
+    }
+
+    .pre-load > div {
+        width: 33.3%;
+    }
+
+    /* .pre-load > div:is(:nth-child(4)) {
+        display: none;
+    } */
 }

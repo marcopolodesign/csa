@@ -62,13 +62,12 @@ const moreAnchors = () => {
   
   document.addEventListener('scroll', (event) => {
     moveCursor(xLocation, distanceFromTop + window.pageYOffset);
-    console.log('Distance from top:', distanceFromTop);
-    console.log('yOffset:', window.pageYOffset);
   });
 
 };
 
 const expertise = (expertise) => {
+  if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
   expertise.forEach((e) => {
     e.addEventListener('mouseenter', () => {
       expertise.forEach((element) => {
@@ -85,6 +84,7 @@ const expertise = (expertise) => {
       });
     });
   });
+}
 }
 
 expertise(document.querySelectorAll('.expertise'));
@@ -105,6 +105,10 @@ const menuScroll = ()=> {
   
       prevScroll = currentScroll;
     });
+
+    let headerColor = pageName.getAttribute('data-header-color');
+
+    header.classList.add(headerColor);
 }
   
 menuScroll();
@@ -236,7 +240,12 @@ barba.init({
     },
 
   ],
-  views: [
+  views: [ {
+    namespace: 'home',
+    afterEnter() {
+      homePhrase()
+    }
+  }
   ],
   debug: true,
 });
@@ -251,6 +260,28 @@ const randomPhrases = () => {
   ]
   let n = Math.floor(Math.random() * (phrases.length))
   preloaderCaption.innerHTML = phrases[n];
+}
+
+const homePhrase = () => {
+
+  let phrase = document.querySelector('h1.typeit span');
+  let phraseStarter = phrase.innerHTML;
+
+  var typewriter = new Typewriter(phrase, {
+    loop: true
+});
+
+typewriter
+    .typeString(phraseStarter)
+    .pauseFor(3000)
+    .deleteAll()
+    .typeString('lasting prosperity')
+    .pauseFor(3000)
+    .deleteAll()
+    .typeString('community prosperity')
+    .pauseFor(3000)
+    .deleteAll()
+    .start();
 }
 
 
