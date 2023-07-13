@@ -150,8 +150,10 @@ if( get_row_layout() == 'texto_&_imagen' ):
             <p class="lh-copy w-50-ns fw1 f3">Communities is a complex process made easier by our specially trained staff.</p>
         </div>
         <div class="heading-line"></div>
+    </div>
 
-        <div class="flex justify-between pv5">
+
+    <div class="flex justify-between starter-bis container pv5">
             <div class="starter-bg-img w-20-ns">
                 <img src="/wp-content/uploads/2023/06/Group-4.jpg">
             </div>
@@ -180,7 +182,6 @@ if( get_row_layout() == 'texto_&_imagen' ):
                 <?php endif; endwhile; endif; ?>
             </div>
         </div>
-    </div>
 
 
 
@@ -194,15 +195,18 @@ $padding = get_sub_field('padding');
     <p class="main-color ttu f6 mb5">Main areas of expertise</p>
 
     <?php if( have_rows('expertise_area') ): while ( have_rows('expertise_area') ): the_row(); ?>
-    <div class="expertise flex smooth-t not-active relative">
+    <a href=<?php the_sub_field('expertise_link');?> class="expertise flex smooth-t not-active relative white no-deco">
         <span class="main-color-bg db smooth-t"></span>
         <div class="expertise-content pl5 smooth-t relative z-2">
             <?php the_sub_field('content');?>
-            <a href=<?php the_sub_field('expertise_link');?> class="ttu mt4 white no-deco flex items-center smooth-t"><p class="mr2">Learn more</p> <?php get_template_part('template-parts/content/arrow');?></a>
+            <div class="ttu mt4 white no-deco flex items-center smooth-t">
+                <p class="mr2">Learn more</p>
+                <?php get_template_part('template-parts/content/arrow');?>
+            </div>
         </div>
 
         <div class="absolute expertise-bg smooth-t bg-center cover" style="background-image: url(<?php the_sub_field('expertise_image');?>);"></div>
-    </div>
+    </a>
 
     <?php endwhile; endif; ?>
 </div>
@@ -291,12 +295,14 @@ $margin = get_sub_field('margins');
 $padding = get_sub_field('padding');
 ?>
 
-
+<div class="container">
+    <div class="heading-line"></div>
+</div>
 
 <div class="numbers container <?php echo $padding .' '; echo $margin; ?>">
     <div class="numbers-inner flex justify-between pv4">
         <div class="w-40-ns big-n flex flex-column justify-center">
-            <h2 class="main-color f0"><?php the_sub_field('big_number');?></h2>
+            <h2 class="main-color f0 animate-number"><?php the_sub_field('big_number');?></h2>
             <p class="tc f3"><?php the_sub_field('big_number_caption');?></p>
         </div>
 
@@ -306,7 +312,7 @@ $padding = get_sub_field('padding');
         <?php if( have_rows('small_numbers') ): while ( have_rows('small_numbers') ): the_row(); ?>
 
             <div class="flex items-center small-n">
-                <h3 class="main-color f0 fw4"><?php the_sub_field('small_number');?></h3>
+                <h3 class="main-color f0 fw4 animate-number"><?php the_sub_field('small_number');?></h3>
                 <p class="f2 lh1 pl3"><?php the_sub_field('small_number_caption');?></p>
             </div>
 
@@ -315,9 +321,11 @@ $padding = get_sub_field('padding');
         <?php endwhile; endif; ?>
         </div>
     </div>
-    
 </div>
 
+<div class="container">
+    <div class="heading-line"></div>
+</div>
 
 
 <?php elseif(get_row_layout() == 'numbers_grid') : 
@@ -328,14 +336,16 @@ $padding = get_sub_field('padding');
 
 
 <div class="numbers-grid container <?php echo $padding .' '; echo $margin; ?> w-100">
-    <div class="numbers-inner flex justify-between pv4-ns">
+    <div class="heading-line"></div>
+    <div class="numbers-inner flex justify-between pv4-ns">   
         <?php if( have_rows('grid_content') ): while ( have_rows('grid_content') ): the_row(); ?>
             <div class="flex flex-column items-center small-n mh3">
-                <h3 class="main-color f0 fw4"><?php the_sub_field('number');?></h3>
+                <h3 class="main-color f0 fw4 animate-number"><?php the_sub_field('number');?></h3>
                 <p class="f3 fw3 lh1 tc"><?php the_sub_field('number_caption');?></p>
             </div>
         <?php endwhile; endif; ?>
     </div>
+    <div class="heading-line"></div>
 </div>
 
 
@@ -369,8 +379,12 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
     const entries = xmlDoc.querySelectorAll('entry');
     console.log(entries);
 
-    let tableHtml = '<table style="border-collapse: collapse; width: 100%; text-align: center;">';
-    tableHtml += '<tr style="border-bottom: 1px solid #ccc;"><th style="padding: 10px;">Date</th><th style="padding: 10px;">1 YR</th><th style="padding: 10px;">2 YR</th><th style="padding: 10px;">3 YR</th><th style="padding: 10px;">5 YR</th><th style="padding: 10px;">7 YR</th><th style="padding: 10px;">10 YR</th><th style="padding: 10px;">20 YR</th><th style="padding: 10px;">30 YR</th></tr>';
+    const padding = '20px';
+
+
+    let tableHtml = `<table style="border-collapse: collapse; width: 100%; text-align: center;">`;
+    tableHtml += `<tr style="border-bottom: 1px solid #ccc; color: var(--mainColor);" class="table-header"><th style="padding: ${padding};">Date</th><th style="padding: ${padding};">1 YR</th><th style="padding: ${padding};">2 YR</th><th style="padding: ${padding};">3 YR</th><th style="padding: ${padding};">5 YR</th><th style="padding: ${padding};">7 YR</th><th style="padding: ${padding};">10 YR</th><th style="padding: ${padding};">20 YR</th><th style="padding: ${padding};">30 YR</th></tr>`;
+
 
     // Get today's date, tomorrow's date, and 30 days ago
     const today = new Date();
@@ -403,8 +417,8 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
 
 
 
-        tableHtml += `<tr style="border-bottom: 1px solid #ccc;"><td style="padding: 10px;">${formattedDate}</td><td style="padding: 10px;">${oneYearRate}%</td><td style="padding: 10px;">${twoYearRate}%</td><td style="padding: 10px;">${threeYearRate}%</td><td style="padding: 10px;">${fiveYearRate}%</td><td style="padding: 10px;">${sevenYearRate}%</td><td style="padding: 10px;">${tenYearRate}%</td><td style="padding: 10px;">${twentynYearRate}%</td><td style="padding: 10px;">${thirtyYearRate}%</td></tr>`;
-      
+        tableHtml += `<tr style="border-bottom: 1px solid #ccc;"><td style="padding: ${padding};">${formattedDate}</td><td style="padding: ${padding};">${oneYearRate}%</td><td style="padding: ${padding};">${twoYearRate}%</td><td style="padding: ${padding};">${threeYearRate}%</td><td style="padding: ${padding};">${fiveYearRate}%</td><td style="padding: ${padding};">${sevenYearRate}%</td><td style="padding: ${padding};">${tenYearRate}%</td><td style="padding: ${padding};">${twentynYearRate}%</td><td style="padding: ${padding};">${thirtyYearRate}%</td></tr>`;
+
     });
 
     tableHtml += '</table>';
@@ -488,8 +502,8 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
     transform: translateX(-15vw);
 }
 
-.starter-secondary-page .heading-line {
-    transform: scaleX(1);
+.starter-bis .heading-line {
+    /* transform: scaleX(1); */
     transform-origin: left;
     width: 100%;
     flex: initial;
@@ -550,7 +564,7 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
     max-height: 0;
 }
 
-.expertise.not-active .expertise-content a{
+.expertise.not-active .expertise-content svg{
     opacity: 0;
     max-height: 0;
 }
@@ -564,13 +578,21 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
 /* Heading Text Desktop */
 
 .heading-text > div:last-child{
-    border-bottom: 1px solid #fff;
+    /* border-bottom: 1px solid #fff; */
 }
 
 .heading-line {
     height: 1px;
     flex: 1 0 0;
     background-color: #fff;
+    transform: scaleX(0);
+    transition: var(--smooth);
+    transform-origin: left;
+    transition-delay: 0.4s
+}
+
+.in-view .heading-line { 
+    transform: scaleX(1);
 }
 
 
@@ -582,7 +604,7 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
 /* Numbers Desktop */
 
 .numbers-inner {
-    border-bottom: 1px solid #fff;
+    /* border-bottom: 1px solid #fff; */
 }
 
 .numbers .heading-line {
@@ -591,6 +613,10 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
 
 .big-n .f0 {
     font-size: 18rem;
+}
+
+.animate-number {
+    text-align: center
 }
 
 .small-n:nth-child(even) {
@@ -729,6 +755,11 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
         padding: 20px;
     }
 
+    .reusable-content > div {
+        margin: 0px 0px 60px;
+    }
+
+
     .page-starter {
         height: 50vh;
         display: flex
@@ -741,7 +772,7 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
     }
 
     .page-starter h1.f0 {
-        font-size: 1.8rem;
+        font-size: 2.8rem;
     }
 
     .starter-arrow svg {
@@ -787,6 +818,15 @@ fetch('https://home.treasury.gov/resource-center/data-chart-center/interest-rate
         padding-top: 0px;
         width: 100%;
         overflow: scroll;
+    }
+
+    .heading-text p {
+       display: none;
+    }
+
+    .heading-text > div:last-child {
+        border-bottom: 0px;
+        padding-bottom: 0px;
     }
 
     .starter-secondary-page {

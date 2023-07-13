@@ -92,6 +92,14 @@ header.scrolled {
     backdrop-filter: blur(100px)
 }
 
+header.scrolled circle[fill="black"] {
+    fill: var(--mainColor)
+  }
+
+header.scrolled path {
+    fill: #000;
+}
+
 header.container-xs.scrolled {
     padding: 1rem 60px;
 }
@@ -296,6 +304,19 @@ header.scrolled .header-nav li:last-child a {
     padding-top: 0px
 }
 
+/* General Animations */
+
+
+.reusable-content > div {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: var(--smooth);
+}
+
+.reusable-content > div.in-view {
+    opacity: 1;
+    transform: translateY(0px);
+}
 
 @media (max-width: 580px) {
 
@@ -310,7 +331,49 @@ header.scrolled .header-nav li:last-child a {
         width: 33.3%;
     }
 
+    header.scrolled circle[fill="black"] {
+        fill: var(--mainColor)
+      }
+    
+    header.scrolled path {
+        fill: #000;
+    }
+
+    header.scrolled path:nth-child(1), header.scrolled path:nth-child(2) {
+        fill: var(--mainColor);
+    }
+    
+    header.scrolled path:nth-child(3) {
+        fill: #fff;
+    }
+
+
+
     /* .pre-load > div:is(:nth-child(4)) {
         display: none;
     } */
+
+
+    /* Footer Mobile */
+
+    footer {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer > * {
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        /* display: flex; */
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    footer > svg {
+        margin-top: 20px;
+    }
 }

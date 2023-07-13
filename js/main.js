@@ -12,6 +12,87 @@ const runScripts = () => {
   setTimeout(() => {
     moreAnchors();
   }, 3000);
+
+
+  const animatePosts = () => {
+
+    let posts = document.querySelectorAll('.reusable-content > div');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio >= 0.13) {
+            entry.target.classList.add('in-view');
+          } else {
+            entry.target.classList.remove('in-view');
+          }
+        });
+      },
+      {
+        threshold: [0, 0.2, 1],
+      }
+    );
+
+    posts.forEach((post) => {
+      observer.observe(post);
+    });
+  }
+
+  const animateNumber = (targetElements, duration = 1000) => {
+    const frameDuration = 1000 / 60; // Assuming 60 frames per second
+  
+    targetElements.forEach((targetElement) => {
+      const startNumber = 0;
+      const targetNumber = parseFloat(targetElement.innerHTML);
+      const difference = Math.abs(targetNumber - startNumber);
+      const animationDuration = Math.min(duration, Math.max(500, difference * (duration / 100))); // Adjust the min and max duration as needed
+  
+      const totalFrames = Math.round(animationDuration / frameDuration);
+      const increment = (targetNumber - startNumber) / totalFrames;
+  
+      let currentNumber = startNumber;
+      let frame = 0;
+  
+      const animate = () => {
+        currentNumber += increment;
+        targetElement.innerHTML = Math.round(currentNumber);
+  
+        frame++;
+        if (frame < totalFrames) {
+          requestAnimationFrame(animate);
+        }
+      };
+  
+      // Intersection Observer configuration
+      const observerConfig = {
+        root: null, // Use the viewport as the root
+        threshold: 0.2, // Trigger animation when at least 20% of the element is visible
+      };
+  
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            animate();
+          }
+        });
+      }, observerConfig);
+  
+      // Start observing the target element
+      observer.observe(targetElement);
+    });
+  };
+  
+  
+  const targetElements = Array.from(document.querySelectorAll('.animate-number'));
+  const duration = 3000;
+
+  animateNumber(targetElements, duration);
+
+  if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    animatePosts();
+  }
+  
 }
 
 runScripts();
@@ -320,3 +401,51 @@ const animatePreLoader = () => {
 }
 
 animatePreLoader();
+
+
+const contact = () => {
+  let hrefs = document.querySelectorAll('a');
+  hrefs.forEach((a) => {
+    if (a.href.indexOf('#contact') > -1) {
+      a.classList.add('barba-prevent');
+      // console.log(a)
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        let timeline = gsap.timeline({
+          defaults: {
+            ease: Expo.easeOut,
+            duration: 0.7,
+          },
+        });
+
+        timeline
+          .set(container, { pointerEvents: 'all', opacity: 1 })
+          .set(contact, { x: '100%' })
+          .set(bg, { opacity: 0 })
+          .to(contact, { x: '0' }, 0)
+          .to(bg, { opacity: 1 }, 0.4);
+      });
+    }
+  });
+  let close = document.querySelector('#close-contact');
+  let bg = document.querySelector('.contact-bg');
+  let contact = document.querySelector('.contact-content');
+  let container = document.querySelector('.contact-form-container');
+
+  close.addEventListener('click', () => {
+    let timeline = gsap.timeline({
+      defaults: {
+        ease: Expo.easeOut,
+        duration: 0.5,
+      },
+    });
+
+    timeline
+      .set(container, { pointerEvents: 'none' })
+      .to(contact, { x: '100%' })
+      .to(bg, { opacity: 0 }, 0);
+  });
+};
+
+contact();
